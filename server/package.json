@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "This will serve as backend for Hair Salon App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "node index.js"
+  },
+  "author": "Ankit Gujar",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "mongoose": "^7.4.3",
+    "nodemon": "^3.0.1",
+    "server": "^1.0.38"
+  }
+}
