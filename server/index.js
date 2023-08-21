@@ -17,9 +17,9 @@ connection.once('open', () => {
 
 //MiddleWare
 
-const salonRouter = require('./routes/salon');
+const salonRouter = require('./routes/salons');
 
-app.use('/salon', salonRouter);
+app.use('/salons', salonRouter);
 
 app.listen(PORT, () =>
   console.log(`Server is listening.We are live at ${PORT}`)

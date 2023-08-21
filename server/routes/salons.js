@@ -1,6 +1,7 @@
 const express = require('express');
 const {
   createSalon,
+  getSalons,
   getSalon,
   updateSalon,
   deleteSalon,
@@ -8,7 +9,8 @@ const {
 const router = express.Router();
 
 router.route('/add').post(createSalon);
-router.route('/').get(getSalon);
+router.route('/:id').get(getSalon);
+router.route('/').get(getSalons);
 router.route('/:id').delete(deleteSalon);
 router.route('/update/:id').post(updateSalon);
 
