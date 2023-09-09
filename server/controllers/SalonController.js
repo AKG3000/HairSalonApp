@@ -1,4 +1,3 @@
-const { findById } = require('../models/salon.model');
 const Salon = require('../models/salon.model');
 
 const createSalon = (req, res) => {

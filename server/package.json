@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "develop": "node index.js"
+    "develop": "node index.js",
+    "develop:debug": "nodemon index.js"
   },
   "author": "Ankit Gujar",
   "license": "ISC",
