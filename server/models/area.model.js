@@ -4,18 +4,20 @@ const { initializeSequence } = require('../utils/SequenceInitializer');
 
 // Define the Area schema
 const areaSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, required: true },
   cityId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'City',
     required: true,
   },
+  lat: { type: Number, required: true },
+  long: { type: Number, required: true },
   pincode: { type: Number, required: true },
-  areaOrder: { type: Number, required: true },
+  areaOrder: { type: Number },
   // Other area-related fields
 });
 
-// Before Saving the City ,We will perform this operation
+// Before Saving the Area ,We will perform this operation
 areaSchema.pre('save', async function (next) {
   try {
     const connection = mongoose.connection;
@@ -28,25 +30,20 @@ areaSchema.pre('save', async function (next) {
       initializeSequence();
     }
     const doc = this;
-    Sequence.findByIdAndUpdate(
+    const sequence = await Sequence.findByIdAndUpdate(
       collectionName, // The name of the target collection
       { $inc: { sequence_value: 1 } },
-      { new: true, upsert: true },
-      (err, sequence) => {
-        if (err) {
-          return next(err);
-        }
-        doc.stateId = sequence.sequence_value;
-        next();
-      }
-    );
+      { new: true, upsert: true }
+    ).exec();
+    doc.areaOrder = sequence.sequence_value;
+    next();
   } catch (err) {
     console.error('Error during Collection Creation:', err);
-    next(err);
+    return next(err);
   }
 });
 
 // Define the Area model
 const Area = mongoose.model('Area', areaSchema);
 
-module.exports = { Area };
+module.exports = Area;
