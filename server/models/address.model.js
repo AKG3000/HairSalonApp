@@ -2,12 +2,18 @@ const mongoose = require('mongoose');
 
 // Define the Address schema
 const addressSchema = new mongoose.Schema({
-  street: { type: string, required: true },
-  city: {
+  addressLine1: { type: String, required: true },
+  addressLine2: { type: String },
+  addressLine3: { type: String },
+  stateId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'State',
+  },
+  cityId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'City',
   },
-  area: {
+  areaId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Area',
   },
@@ -20,4 +26,4 @@ const addressSchema = new mongoose.Schema({
 // Define the Address model
 const Address = mongoose.model('Address', addressSchema);
 
-module.exports = { Address };
+module.exports = Address;
