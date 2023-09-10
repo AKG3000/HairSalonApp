@@ -9,7 +9,7 @@ const SalonSchema = new Schema({
     ref: 'User',
     required: true,
   },
-  addressId:{
+  addressId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Address',
   },
@@ -18,7 +18,7 @@ const SalonSchema = new Schema({
     default:
       'http://www.energyfit.com.mk/wp-content/plugins/ap_background/images/default/default_1.png',
   },
-  salonCategory : {type:string},
+  salonCategory: { type: String },
   phoneNo: { type: String, required: true },
 });
 
