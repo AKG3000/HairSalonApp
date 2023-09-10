@@ -19,10 +19,12 @@ connection.once('open', () => {
 const salonRouter = require('./routes/salons');
 const stateRouter = require('./routes/states');
 const cityRouter = require('./routes/cities');
+const areaRouter = require('./routes/areas');
 
 app.use('/salons', salonRouter);
 app.use('/states', stateRouter);
 app.use('/cities', cityRouter);
+app.use('/areas', areaRouter);
 
 app.listen(PORT, () =>
   console.log(`Server is listening.We are live at ${PORT}`)
