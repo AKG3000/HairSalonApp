@@ -7,7 +7,7 @@ const stateSchema = new mongoose.Schema({
   name: { type: String, required: true },
   lat: { type: Number, required: true },
   long: { type: Number, required: true },
-  stateOrder: { type: Number, required: true },
+  stateOrder: { type: Number },
 });
 
 // Before Saving the State ,We will perform this operation
@@ -23,25 +23,20 @@ stateSchema.pre('save', async function (next) {
       initializeSequence();
     }
     const doc = this;
-    Sequence.findByIdAndUpdate(
+    const sequence = await Sequence.findByIdAndUpdate(
       collectionName, // The name of the target collection
       { $inc: { sequence_value: 1 } },
-      { new: true, upsert: true },
-      (err, sequence) => {
-        if (err) {
-          return next(err);
-        }
-        doc.stateId = sequence.sequence_value;
-        next();
-      }
-    );
+      { new: true, upsert: true }
+    ).exec();
+    doc.stateOrder = sequence.sequence_value;
+    next();
   } catch (err) {
     console.error('Error during Collection Creation:', err);
-    next(err);
+    return next(err);
   }
 });
 
 //Define the State Model
 const State = mongoose.model('State', stateSchema);
 
-module.exports = { State };
+module.exports = State;

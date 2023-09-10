@@ -1,4 +1,4 @@
-const Sequence = require('./sequenceModel'); // Import the Sequence model
+const Sequence = require('../models/helperModels/sequence.model'); // Import the Sequence model
 
 function initializeSequence(collectionName) {
   Sequence.create({ _id: collectionName, sequence_value: 1 }, (err, result) => {
