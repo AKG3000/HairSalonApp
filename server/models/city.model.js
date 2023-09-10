@@ -10,8 +10,8 @@ const citySchema = new mongoose.Schema({
     ref: 'State',
     required: true,
   },
-  latitude: { type: Number, required: true },
-  longitude: { type: Number, required: true },
+  lat: { type: Number, required: true },
+  long: { type: Number, required: true },
   isPopular: { type: Boolean, default: false },
   hasArea: { type: Boolean, default: false },
   cityOrder: { type: Number },
@@ -31,25 +31,20 @@ citySchema.pre('save', async function (next) {
       initializeSequence();
     }
     const doc = this;
-    Sequence.findByIdAndUpdate(
+    const sequence = await Sequence.findByIdAndUpdate(
       collectionName, // The name of the target collection
       { $inc: { sequence_value: 1 } },
-      { new: true, upsert: true },
-      (err, sequence) => {
-        if (err) {
-          return next(err);
-        }
-        doc.stateId = sequence.sequence_value;
-        next();
-      }
-    );
+      { new: true, upsert: true }
+    ).exec();
+    doc.cityOrder = sequence.sequence_value;
+    next();
   } catch (err) {
     console.error('Error during Collection Creation:', err);
-    next(err);
+    return next(err);
   }
 });
 
 // Define the City model
 const City = mongoose.model('City', citySchema);
 
-module.exports = { City };
+module.exports = City;
