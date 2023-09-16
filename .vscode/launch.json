@@ -1,17 +1,19 @@
 {
     "configurations": [
-    {
-        "console": "integratedTerminal",
-        "internalConsoleOptions": "neverOpen",
-        "name": "nodemon",
-        "program": "${workspaceFolder}/app.js",
-        "request": "launch",
-        "restart": true,
-        "runtimeExecutable": "nodemon",
-        "skipFiles": [
-            "<node_internals>/**"
-        ],
-        "type": "pwa-node"
-    }
+        {
+            "type":"node",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "name": "nodemon",
+            "program": "C:/Users/ankit.gujar/CodeBase/personal/Projects/HairSalon/HairSalonApp/server/index.js",
+            "request": "launch",
+            "restart": true,
+            "cwd": "C:/Users/ankit.gujar/CodeBase/personal/Projects/HairSalon/HairSalonApp/server",
+            "port":3010,
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        }
     ]
+    
 }

@@ -1,11 +1,12 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
-    name: {
+    userName: {
       type: String,
       required: true,
+      unique: true,
     },
     email: {
       type: String,
@@ -19,10 +20,13 @@ const userSchema = new Schema(
     role: {
       type: String,
       required: true,
-      enum: ['user', 'owner'],
+      enum: ['user', 'admin'],
+      default: 'user',
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;
