@@ -103,5 +103,6 @@ dist
 # TernJS port file
 .tern-port
 client/package-lock.json
+server/package-lock.json
 client/index.html
 .vscode/launch.json
